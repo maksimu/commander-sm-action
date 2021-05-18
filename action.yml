@@ -17,7 +17,7 @@ runs:
     # - run: python ${{ github.action_path }}/entrypoint.py ${{ inputs.gh_token }} ${{ inputs.file_name }} ${{ github.workspace }} ${{ inputs.max_repo_description }}
     - name: Run Entry
       env:
-        KEEPER_SECRET_KEY: ${{ secrets.KEEPER_ONE_TIME_SECRET_TOKEN }}
+        KEEPER_SECRET_KEY: ${{ secrets.KEEPER_SECRET_KEY }}
       run: python ${{ github.action_path }}/entrypoint.py
       shell: bash
 
