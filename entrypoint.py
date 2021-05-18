@@ -16,4 +16,4 @@ core.error('TEST ERROR: Something went wrong.')
 core.info('TEST INFO: Run successfully.')
 
 
-core.set_failed('TEST ERROR: SSL certificates installation failed.')
+# core.set_failed('TEST ERROR: SSL certificates installation failed.')
