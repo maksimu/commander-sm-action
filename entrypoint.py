@@ -6,9 +6,9 @@ for k, v in os.environ.items():
 
 # os.environ['INPUT_NAME'] = 'Actions Toolkit'
 # core.get_input('name')
-who_to_greet = core.get_input('who-to-greet')
+# who_to_greet = core.get_input('who-to-greet')
 
-core.info('who_to_greet=%s' % who_to_greet)
+# core.info('who_to_greet=%s' % who_to_greet)
 
 core.error('TEST ERROR: Something went wrong.')
 
