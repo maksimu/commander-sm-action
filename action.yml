@@ -9,5 +9,10 @@ outputs:
   time: # id of output
     description: 'The time we greeted you'
 runs:
-  using: 'node12'
-  main: 'index.js'
+  using: "composite"
+  steps:
+    - run: python -m pip install actions-toolkit keepersecuritysm  # Installing dependencies
+      shell: bash
+    # - run: python ${{ github.action_path }}/entrypoint.py ${{ inputs.gh_token }} ${{ inputs.file_name }} ${{ github.workspace }} ${{ inputs.max_repo_description }}
+    - run: python ${{ github.action_path }}/entrypoint.py
+      shell: bash
