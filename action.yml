@@ -1,10 +1,13 @@
 name: 'Hello World'
 description: 'Greet someone and record the time'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  # who-to-greet:  # id of input
+  #   description: 'Who to greet'
+  #   required: true
+  #   default: 'World'
+  keeper-secret-key:
+    description: 'Keeper Commander Secret key'
     required: true
-    default: 'World'
 outputs:
   time: # id of output
     description: 'The time we greeted you'
@@ -16,8 +19,6 @@ runs:
       shell: bash
     # - run: python ${{ github.action_path }}/entrypoint.py ${{ inputs.gh_token }} ${{ inputs.file_name }} ${{ github.workspace }} ${{ inputs.max_repo_description }}
     - name: Run Entry
-      env:
-        KEEPER_SECRET_KEY: ${{ secrets.KEEPER_SECRET_KEY }}
       run: python ${{ github.action_path }}/entrypoint.py
       shell: bash
 
