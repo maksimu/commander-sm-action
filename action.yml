@@ -1,27 +1,26 @@
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: 'Keeper Commander Secrets Valut'
+description: 'A GitHub Action to consume Secrets from Keeper'
 inputs:
-  # who-to-greet:  # id of input
-  #   description: 'Who to greet'
-  #   required: true
-  #   default: 'World'
-  keeper-secret-key:
-    description: 'Keeper Commander Secret key'
+
+  keeper-secret-config:
+    description: 'Keeper Commander config file'
     required: true
-outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+  
+  secrets:
+    description: 'A list of secrets to retrieve from Keeper Vault'
+    required: true
+
 runs:
   using: "composite"
   steps:
-    - run: echo keeper-secret-key ${{ inputs.keeper-secret-key }}.
-      shell: bash
+
     - run: python -m pip install actions-toolkit keepersecuritysm  # Installing dependencies
       shell: bash
-    # - run: python ${{ github.action_path }}/entrypoint.py ${{ inputs.gh_token }} ${{ inputs.file_name }} ${{ github.workspace }} ${{ inputs.max_repo_description }}
+
     - name: Run Entry
       env:
-        KEEPER_SECRET_KEY: ${{ inputs.keeper-secret-key }}
+        SECRET_CONFIG: ${{ inputs.keeper-secret-config }}
+        SECRETS: ${{ inputs.secrets }}
       run: python ${{ github.action_path }}/entrypoint.py
       shell: bash
 

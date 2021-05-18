@@ -9,12 +9,17 @@ jobs:
     runs-on: ubuntu-latest
     name: A job to say hello
     steps:
-      - name: Hello world action step
-        id: hello
+
+      - name: Example to retrieve a secret File 1
+        id: filestep
         uses: maksimu/commander-sm-action@master
         with:
           keeper-secret-key: ${{ secrets.KEEPER_SECRET_KEY }}
-          # who-to-greet: 'Mona the Octocat'
+          secrets: |
+              uid123 password | PASSWORD
+              uid321 file/config.json | file://path/to/file.json
+
+
       # Use the output from the `hello` step
       - name: Get the output time
-        run: echo "The time was ${{ steps.hello.outputs.time }}"
+        run: echo "The time was ${{ steps.filestep.outputs }}"
