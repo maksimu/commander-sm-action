@@ -1,6 +1,9 @@
 import os
 from actions_toolkit import core
 
+for k, v in os.environ.items():
+    print(f'{k}={v}')
+
 # os.environ['INPUT_NAME'] = 'Actions Toolkit'
 # core.get_input('name')
 who_to_greet = core.get_input('who-to-greet')
