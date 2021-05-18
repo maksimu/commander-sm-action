@@ -18,8 +18,8 @@ core.error('TEST ERROR: Something went wrong.')
 
 core.info('TEST INFO: Run successfully.')
 
-# KEEPER_SECRET_KEY = environ.get('KEEPER_SECRET_KEY') 
-KEEPER_SECRET_KEY = core.get_input('keeper-secret-key')
+KEEPER_SECRET_KEY = environ.get('KEEPER_SECRET_KEY') 
+# KEEPER_SECRET_KEY = core.get_input('keeper-secret-key')
 core.info('KEEPER_SECRET_KEY=%s' % KEEPER_SECRET_KEY)
 
 

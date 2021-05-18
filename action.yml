@@ -14,11 +14,14 @@ outputs:
 runs:
   using: "composite"
   steps:
-    
+    - run: echo keeper-secret-key ${{ inputs.keeper-secret-key }}.
+      shell: bash
     - run: python -m pip install actions-toolkit keepersecuritysm  # Installing dependencies
       shell: bash
     # - run: python ${{ github.action_path }}/entrypoint.py ${{ inputs.gh_token }} ${{ inputs.file_name }} ${{ github.workspace }} ${{ inputs.max_repo_description }}
     - name: Run Entry
+      env:
+        KEEPER_SECRET_KEY: ${{ inputs.keeper-secret-key }}
       run: python ${{ github.action_path }}/entrypoint.py
       shell: bash
 
