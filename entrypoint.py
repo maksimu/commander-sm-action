@@ -6,12 +6,6 @@ from actions_toolkit import core
 from keepercommandersm import Commander
 from keepercommandersm.storage import FileKeyValueStorage
 
-for k, v in os.environ.items():
-    print(f'{k}={v}')
-
-# os.environ['INPUT_NAME'] = 'Actions Toolkit'
-# who_to_greet = core.get_input('who-to-greet')
-
 
 def find_record(all_secrets, search_term):
 
@@ -24,8 +18,9 @@ def find_record(all_secrets, search_term):
 
 def value_retrieve_and_set(record, secret_value_location, destination_str):
 
+    core.start_group("Secret uid=%s" % record.uid)
     if secret_value_location == 'password':
-        
+        core.info("Password field")
         destination_arr = destination_str.split(':')
 
         env_var_name = None
@@ -44,42 +39,54 @@ def value_retrieve_and_set(record, secret_value_location, destination_str):
 
 
     elif secret_value_location.startswith('file:'):
+        
         file_name = secret_value_location.split(":")
         
+        core.info("File %s" % file_name)
+        core.debug("Number of files in secret: %s" % len(record.files))
         file_found = None
         for file in record.files:
+
             if file.name == file_name:
                 file_found = file
-        
+                
+                if file_found:
+                    core.warning("More than two files names %s. Make sure to have unique names for files." % file_name)
+                    # TODO Is there a way to get files by their UID? or some other unique identifier?
+
+        if not file_found:
+            core.warning("No files found named %s" % file_found)
+            core.end_group()
+            return
+
+        core.info("Located file %s" % file_name)
         
         is_file_destination = destination_str.startswith('file:')
 
         if is_file_destination:
-            destination_path = destination_str.lstrip('file:')    # /path/to/file.json
+            destination_path = destination_str.lstrip('file:').strip()    # /path/to/file.json
+            core.info("File destination: %s" % destination_path)
 
             file.save_file(destination_path, True)
+            core.debug("File saved to %s" % destination_path)
         else:
             core.error("Only file destination is currently supported. Ex. file:/path/to/file.json")
-
     
+    core.end_group()
 
 
-core.info('TEST INFO: Run successfully.')
+core.info('Keeper Commander')
 
 keeper_server = environ.get('KEEPER_SERVER')
 SECRET_CONFIG = environ.get('SECRET_CONFIG')
 SECRETS = environ.get('SECRETS')
 
-
-
-# KEEPER_SECRET_KEY = core.get_input('keeper-secret-key')
-core.info('SECRET_CONFIG=%s' % SECRET_CONFIG)
-core.info('SECRETS=%s' % SECRETS)
+core.debug('SECRETS=%s' % SECRETS)
 
 
 # 1. Authenticate Commander
 if keeper_server:
-    core.info('Setting Keeper server=%s' % keeper_server)
+    core.info('Setting Keeper server: %s' % keeper_server)
     Commander.server = keeper_server
 
 config_file_path = "gha-config.json"
@@ -90,19 +97,21 @@ config_file.close()
 
 
 Commander.config = FileKeyValueStorage(config_file_path)
+core.debug("Begin retrieving secrets from Keeper...")
 all_secrets = Commander.fetch()
-
-
-
-# SECRETS = """
-#   uid123 password | PASSWORD
-#   uid321 file/config.json | file://path/to/file.json
-# """
+core.info("Retieved %s secrets." % len(all_secrets))
 
 secrets_entries = SECRETS.splitlines()
 
+core.debug("Secrets to retrieve: %s" % len(secrets_entries))
+
+count = 0
 for se in secrets_entries:
     
+    count = count + 1
+
+    core.start_group("Retreiving secret %s" % str(count))
+
     # uid123 password | PASSWORD
     se_parts = se.split('|')
 
@@ -120,9 +129,9 @@ for se in secrets_entries:
     
     value_retrieve_and_set(record, secret_value_location, destination_str)
 
+    core.end_group()
 
-    
 
-
+core.info("End retreiving secrets from Keeper Security")
 
 # core.set_failed('TEST ERROR: SSL certificates installation failed.')
