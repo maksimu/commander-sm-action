@@ -5,21 +5,27 @@ on:
   workflow_dispatch:
 
 jobs:
-  hello_world_job:
+  buildexecutable:
     runs-on: ubuntu-latest
-    name: A job to say hello
+    name: Build process
     steps:
 
-      - name: Example to retrieve a secret File 1
-        id: filestep
+      - name: Retrieve secrets from Keeper
+        id: file_retrieve_step
         uses: maksimu/commander-sm-action@master
         with:
-          keeper-secret-key: ${{ secrets.KEEPER_SECRET_KEY }}
+          keeper-secret-config: ${{ secrets.KEEPER_SECRET_KEY }}
           secrets: |
               uid123 password | PASSWORD
-              uid321 file/config.json | file://path/to/file.json
+              uid234 password | env:PASSWORD
+              uid234 password | out:PASSWORD
+              uid234 field:login | out:OUTPASs
+              uid234 custom:Cust1 | env:CUST1
+              uid321 file:config.json | file:~/to/file.json
+              uid321 file:Certificate.crt | file:/Users/mustinov/Downloads/_v2
+              
 
 
       # Use the output from the `hello` step
-      - name: Get the output time
-        run: echo "The time was ${{ steps.filestep.outputs }}"
+      - name: Print password
+        run: echo "password is ${{ steps.file_retrieve_step.outputs.OUTPASs }}"

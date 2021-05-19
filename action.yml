@@ -6,6 +6,10 @@ inputs:
     description: 'Keeper Commander config file'
     required: true
   
+  server:
+    description: 'Keeper server'
+    required: false
+
   secrets:
     description: 'A list of secrets to retrieve from Keeper Vault'
     required: true
@@ -19,6 +23,7 @@ runs:
 
     - name: Run Entry
       env:
+        KEEPER_SERVER: ${{ inputs.keeper-server }}
         SECRET_CONFIG: ${{ inputs.keeper-secret-config }}
         SECRETS: ${{ inputs.secrets }}
       run: python ${{ github.action_path }}/entrypoint.py
