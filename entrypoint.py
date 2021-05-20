@@ -81,7 +81,7 @@ keeper_server = environ.get('KEEPER_SERVER')
 SECRET_CONFIG = environ.get('SECRET_CONFIG')
 SECRETS = environ.get('SECRETS')
 
-core.debug('SECRETS=%s' % SECRETS)
+core.debug('SECRETS text=%s' % SECRETS)
 
 
 # 1. Authenticate Commander
@@ -99,7 +99,7 @@ config_file.close()
 Commander.config = FileKeyValueStorage(config_file_path)
 core.debug("Begin retrieving secrets from Keeper...")
 all_secrets = Commander.fetch()
-core.info("Retieved %s secrets." % len(all_secrets))
+core.info("Retrieved %s secrets." % len(all_secrets))
 
 secrets_entries = SECRETS.splitlines()
 
@@ -110,7 +110,7 @@ for se in secrets_entries:
     
     count = count + 1
 
-    core.start_group("Retreiving secret %s" % str(count))
+    core.start_group("Retrieving secret %s" % str(count))
 
     # uid123 password | PASSWORD
     se_parts = se.split('|')
@@ -122,9 +122,8 @@ for se in secrets_entries:
     record_identifier     = record_details_arr[0]          # 'uid123'
     secret_value_location = record_details_arr[1]          # Field to retrieve. ex. 'password'
     record = find_record(all_secrets, record_identifier)
-    # destination
 
-    # 2. Storring
+    # 2. Storing
     destination_str = se_parts[1].strip()               # 'PASSWORD' OR 'file:/path/to/file.json'
     
     value_retrieve_and_set(record, secret_value_location, destination_str)
