@@ -1,4 +1,3 @@
-import logging
 import os
 from os import environ
 from actions_toolkit import core
@@ -7,14 +6,15 @@ from keepercommandersm import Commander
 from keepercommandersm.storage import FileKeyValueStorage
 
 
-def find_record(all_secrets, search_term):
+def find_record(secrets, search_term):
 
     found_rec = None
-    for r in all_secrets.get('records'):
-        if r.uid == search_term or r.title == search_term:
-            found_rec = r
+    for s in secrets.get('records'):
+        if s.uid == search_term or s.title == search_term:
+            found_rec = s
     
     return found_rec
+
 
 def value_retrieve_and_set(record, secret_value_location, destination_str):
 
@@ -23,24 +23,24 @@ def value_retrieve_and_set(record, secret_value_location, destination_str):
         core.info("Password field")
         destination_arr = destination_str.split(':')
 
-        env_var_name = None
-
         if len(destination_arr) == 1:
             env_var_name = destination_arr[0].strip()
+            os.environ[env_var_name] = record.password
+
         elif len(destination_arr) == 2:
             dest = destination_arr[0].strip()
             
             if dest == 'env':
                 env_var_name = destination_arr[1].strip()
+                os.environ[env_var_name] = record.password
 
-         
-            
-        os.environ[env_var_name] = record.password
-
+            elif dest == 'out':
+                out_name = destination_arr[1].strip()
+                core.set_output(out_name, record.password)
 
     elif secret_value_location.startswith('file:'):
         
-        file_name = secret_value_location.split(":")
+        file_name = secret_value_location.split(":")[1]
         
         core.info("File %s" % file_name)
         core.debug("Number of files in secret: %s" % len(record.files))
@@ -132,6 +132,6 @@ for se in secrets_entries:
     core.end_group()
 
 
-core.info("End retreiving secrets from Keeper Security")
+core.info("Finish retrieving secrets from Keeper Security")
 
 # core.set_failed('TEST ERROR: SSL certificates installation failed.')
