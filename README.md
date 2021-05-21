@@ -85,7 +85,7 @@ Available values:
   
   ```yaml
   - name: Retrieve secrets from Keeper
-    uses: maksimu/commander-sm-action@master
+    uses: Keeper-Security/commander-actions@v1
     with:
       keeper-secret-config: ${{ secrets.KEEPER_SECRET_KEY }}
       secrets: |

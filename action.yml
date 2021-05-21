@@ -7,7 +7,7 @@ inputs:
     required: true
   
   server:
-    description: 'Keeper server'
+    description: 'Keeper server host name (ex. keepersecurity.au) or abbreviation (ex. EU)'
     required: false
 
   secrets:
@@ -18,7 +18,7 @@ runs:
   using: "composite"
   steps:
 
-    - run: python -m pip install actions-toolkit keepersecuritysm  # Installing dependencies
+    - run: python -m pip install -r ${{ github.action_path }}/src/requirements.txt  # Installing dependencies
       shell: bash
 
     - name: Run Entry
@@ -26,6 +26,6 @@ runs:
         KEEPER_SERVER: ${{ inputs.keeper-server }}
         SECRET_CONFIG: ${{ inputs.keeper-secret-config }}
         SECRETS: ${{ inputs.secrets }}
-      run: python ${{ github.action_path }}/entrypoint.py
+      run: python ${{ github.action_path }}/src/entrypoint.py
       shell: bash
 
