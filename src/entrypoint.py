@@ -83,6 +83,12 @@ def run_action():
     keeper_server = environ.get('KEEPER_SERVER')
     secret_config = environ.get('SECRET_CONFIG')
     secret_query = environ.get('SECRETS')
+    verify_ssl_certs = environ.get('VERIFY_SSL_CERTS')
+
+    if verify_ssl_certs:
+        verify_ssl_certs = verify_ssl_certs.lower() in ['true', '1', 't', 'y', 'yes']
+    else:
+        verify_ssl_certs = True
 
     core.debug('Secret query=%s' % secret_query)
 
@@ -90,6 +96,8 @@ def run_action():
     if keeper_server:
         core.info('Setting Keeper server: %s' % keeper_server)
         Commander.server = keeper_server
+
+    Commander.verify_ssl_certs = verify_ssl_certs
 
     config_file_path = "gha-config.json"
     config_file = open(config_file_path, "wt")

@@ -15,6 +15,7 @@ jobs:
         uses: maksimu/commander-sm-action@master
         with:
           keeper-secret-config: ${{ secrets.KEEPER_SECRET_KEY }}
+          verify-ssl-certs: false
           secrets: |
               uid123 password | PASSWORD
               uid234 password | env:PASSWORD

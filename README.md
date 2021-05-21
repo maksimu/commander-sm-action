@@ -3,7 +3,7 @@
 This action securely retrieves secrets from Keeper and places them to the desired destination of the runner such as 
 environment variable, output parameters of the step or to the file.
 
-## TL;DR
+## TL; DR
 
 ```yaml
 on: 
@@ -40,8 +40,8 @@ jobs:
 | Input                  | Required | Available Values                                                                                                                                                                                                                                                                      | Example                                                                                                                |   |
 |------------------------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------|---|
 | `keeper-secret-config` | Yes      | n/a                                                                                                                                                                                                                                                                                   | `keeper-secret-config: ${{ secrets.KEEPER_SECRET_KEY }}`                                            |   |
-| `secrets`              | Yes      |                                                                                                                                                                                                                                                                                       | ```yaml<br>secrets: \|<br><br>    uid123 password \| APP_PASSWORD<br><br>    uid234 password \| env:DB_PASSWORD<br>``` |   |
-| `server`               | No       | - Host<br>  - `https://keepersecurity.com`<br>  - `keepersecurity.com`<br><br>- Abbreviation<br>  - `US` - Default: resolve to `keepersecurity.com` <br>  - `EU` - resolve to `keepersecurity.eu`<br>  - `AU` - resolve to `keepersecurity.com.au`<br>  - `US_GOV` - resolve to `TBD` | ```yaml<br>server: EU<br>```                                                                                           |   |
+| `secrets`              | Yes      |                                                                                                                                                                                                                                                                                       | ``` yaml<br>secrets: \|<br><br>    uid123 password \| APP_PASSWORD<br><br>    uid234 password \| env:DB_PASSWORD<br>``` |   |
+| `server`               | No       | - Host<br>  - `https://keepersecurity.com`<br>  - `keepersecurity.com`<br><br>- Abbreviation<br>  - `US` - Default: resolve to `keepersecurity.com` <br>  - `EU` - resolve to `keepersecurity.eu`<br>  - `AU` - resolve to `keepersecurity.com.au`<br>  - `US_GOV` - resolve to `TBD` | ``` yaml<br>server: EU<br>```                                                                                           |   |
 |                        |          |                                                                                                                                                                                                                                                                                       |                                                                                                                        |   |
 ## Outputs
 

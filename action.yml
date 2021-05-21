@@ -10,6 +10,10 @@ inputs:
     description: 'Keeper server host name (ex. keepersecurity.au) or abbreviation (ex. EU)'
     required: false
 
+  verify-ssl-certs:
+    description: 'Verify SSL certificate. Default: true'
+    required: false
+
   secrets:
     description: 'A list of secrets to retrieve from Keeper Vault'
     required: true
@@ -25,6 +29,7 @@ runs:
       env:
         KEEPER_SERVER: ${{ inputs.keeper-server }}
         SECRET_CONFIG: ${{ inputs.keeper-secret-config }}
+        VERIFY_SSL_CERTS: ${{ inputs.verify-ssl-certs }}
         SECRETS: ${{ inputs.secrets }}
       run: python ${{ github.action_path }}/src/entrypoint.py
       shell: bash
