@@ -1,9 +1,9 @@
-name: 'Keeper Commander Secrets Valut'
-description: 'A GitHub Action to consume Secrets from Keeper'
+name: 'Keeper Commander Secrets Vault'
+description: 'A GitHub Action to consume secrets from Keeper'
 inputs:
 
   keeper-secret-config:
-    description: 'Keeper Commander config file'
+    description: 'Keeper Commander config json'
     required: true
   
   server:
