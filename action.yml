@@ -22,7 +22,8 @@ runs:
   using: "composite"
   steps:
 
-    - run: python -m pip install -r ${{ github.action_path }}/src/requirements.txt  # Installing dependencies
+    - name: Installing dependencies
+      run: python -m pip install -r ${{ github.action_path }}/requirements.txt  #
       shell: bash
 
     - name: Run Entry
@@ -31,6 +32,6 @@ runs:
         SECRET_CONFIG: ${{ inputs.keeper-secret-config }}
         VERIFY_SSL_CERTS: ${{ inputs.verify-ssl-certs }}
         SECRETS: ${{ inputs.secrets }}
-      run: python ${{ github.action_path }}/src/entrypoint.py
+      run: python ${{ github.action_path }}/ghaentrypoint.py
       shell: bash
 
