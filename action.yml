@@ -7,12 +7,14 @@ inputs:
     required: true
   
   server:
-    description: 'Keeper server host name (ex. keepersecurity.au) or abbreviation (ex. EU)'
+    description: 'Keeper server host name (ex. keepersecurity.au) or abbreviation (ex. EU). Default: keepersecurity.com'
     required: false
+    default: 'keepersecurity.com'
 
   verify-ssl-certs:
     description: 'Verify SSL certificate. Default: true'
     required: false
+    default: 'true'
 
   secrets:
     description: 'A list of secrets to retrieve from Keeper Vault'
