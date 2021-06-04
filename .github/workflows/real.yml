@@ -18,9 +18,10 @@ jobs:
           verify-ssl-certs: false
           secrets: |
             KDjNKy8EkxYVLbnAadJvAQ password | env:PASSWORD
+            KDjNKy8EkxYVLbnAadJvAQ password | out:OUT_PASSWORD
             KDjNKy8EkxYVLbnAadJvAQ file:Certificate.crt | file:~/savedfilefromkeeeper.crt
 
       # Use the output from the `hello` step
       - name: Print password
-        run: echo "password is ${{ steps.file_retrieve_step.outputs.OUTPASs }}"
+        run: echo "password is ${{ steps.file_retrieve_step.outputs.OUT_PASSWORD }}"
       - run: ls -la
