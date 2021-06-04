@@ -143,6 +143,9 @@ def run_action():
     else:
         verify_ssl_certs = True
 
+    if not secret_config:
+        core.set_failed("Commander configuration is empty")
+
     core.debug('Secret query=%s' % secret_query)
 
     # 1. Authenticate Commander

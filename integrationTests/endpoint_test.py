@@ -12,10 +12,10 @@ import os
 
 from dotenv import load_dotenv
 
-from src import entrypoint
+import ghaentrypoint
 
 dotenv_path = os.path.join(os.path.dirname(__file__), 'test.env')
 load_dotenv(dotenv_path)
 
 
-entrypoint.run_action()
+ghaentrypoint.run_action()
