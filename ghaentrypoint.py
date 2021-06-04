@@ -173,17 +173,20 @@ def run_action():
     core.debug("Secrets to retrieve: %s" % len(record_actions))
 
     count = 0
-    for rae in record_actions:
+    for record_action in record_actions:
 
         count += 1
 
-        core.start_group("Retrieving secret %s: uid=%s" % (str(count), rae.uid))
+        core.start_group("Retrieving secret %s: uid=%s" % (str(count), record_action.uid))
 
-        record = find_record(retrieved_secrets, rae.uid)
+        record = find_record(retrieved_secrets, record_action.uid)
+
+        if record:
+            value_retrieve_and_set(record, record_action)
+        else:
+            core.warning("Record uid=%s not found." % record_action.uid)
 
         # 2. Storing
-
-        value_retrieve_and_set(record, rae)
 
         core.end_group()
 
