@@ -17,9 +17,9 @@ jobs:
           keeper-secret-config: ${{ secrets.KEEPER_SECRET_KEY }}
           verify-ssl-certs: false
           secrets: |
-            KDjNKy8EkxYVLbnAadJvAQ password | env:PASSWORD
-            KDjNKy8EkxYVLbnAadJvAQ password | out:OUT_PASSWORD
-            KDjNKy8EkxYVLbnAadJvAQ file:Certificate.crt | file:~/savedfilefromkeeeper.crt
+            Ht1zi8X_qctAl640JIhzYg password | env:PASSWORD
+            Ht1zi8X_qctAl640JIhzYg password | out:OUT_PASSWORD
+#            KDjNKy8EkxYVLbnAadJvAQ file:Certificate.crt | file:~/savedfilefromkeeeper.crt
 
       # Use the output from the `hello` step
       - name: Print password

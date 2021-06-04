@@ -146,11 +146,11 @@ def run_action():
     if not secret_config:
         core.set_failed("Commander configuration is empty")
 
-    core.debug('Secret query=%s' % secret_query)
+    core.debug('Secret query:%s' % secret_query)
 
     # 1. Authenticate Commander
     if keeper_server:
-        core.info('Setting Keeper server: %s' % keeper_server)
+        core.info('Keeper server: %s' % keeper_server)
         Commander.server = keeper_server
 
     Commander.verify_ssl_certs = verify_ssl_certs
