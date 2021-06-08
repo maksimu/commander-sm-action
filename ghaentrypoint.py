@@ -19,7 +19,7 @@ class RecordActionEntry:
     def __init__(self):
         self.uid = None
         self.field = None
-        self.destination = DestinationKey.ENV
+        self.destination_type = DestinationKey.ENV
         self.destination_val = None
 
     @staticmethod
@@ -58,7 +58,7 @@ class RecordActionEntry:
         rae = RecordActionEntry()
         rae.uid = record_uid.strip()
         rae.field = secret_value_location.strip()
-        rae.destination = destination_key
+        rae.destination_type = destination_key
         rae.destination_val = destination_val.strip()
 
         return rae
@@ -99,7 +99,7 @@ def __save_to_file(record, rae):
 
     core.info("Located file %s" % file_name)
 
-    is_file_destination = rae.destination == DestinationKey.FILE
+    is_file_destination = rae.destination_type == DestinationKey.FILE
 
     if is_file_destination:
         core.info("File destination: %s" % rae.destination_val)
@@ -114,17 +114,21 @@ def value_retrieve_and_set(record, rae):
 
     core.start_group("Secret uid=%s" % record.uid)
 
-    if rae.destination != DestinationKey.FILE and rae.field != 'password':
+    if rae.destination_type != DestinationKey.FILE and rae.field != 'password':
         raise Exception("Currently supporting only password fields or files")
 
-    if rae.destination == DestinationKey.ENV:
-        os.environ[rae.destination_val] = record.password
-    elif rae.destination == DestinationKey.OUT:
+    if rae.destination_type == DestinationKey.ENV:
+        if record.password:
+            os.environ[rae.destination_val] = record.password
+        else:
+            core.warning("Password field is empty")
+
+    elif rae.destination_type == DestinationKey.OUT:
         core.set_output(rae.destination_val, record.password)
-    elif rae.destination == DestinationKey.FILE:
+    elif rae.destination_type == DestinationKey.FILE:
         __save_to_file(record, rae)
     else:
-        raise Exception("Unknown destination type specified: %s" % rae.destination)
+        raise Exception("Unknown destination type specified: %s" % rae.destination_type)
 
     core.end_group()
 
@@ -184,7 +188,7 @@ def run_action():
         if record:
             value_retrieve_and_set(record, record_action)
         else:
-            core.warning("Record uid=%s not found." % record_action.uid)
+            core.warning("Record uid=%s not found. Make sure you have this record added to the application you are using." % record_action.uid)
 
         # 2. Storing
 
