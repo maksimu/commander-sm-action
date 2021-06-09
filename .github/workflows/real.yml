@@ -29,7 +29,7 @@ jobs:
       # Use the output from the `hello` step
       - name: Print password
         run: |
-          echo "password is [${{ steps.zecrets.outputs.OUT_SECRIT }}]"
+          echo "password is [${{ steps.zecrets.outputs.OUT_SECRIT }}]\n"
           echo "veg is [${{ steps.zecrets.outputs.action_veg }}]\n"
           echo "who is [${{ steps.zecrets.outputs.WHO }}]\n"
           echo "All Outputs of 'zecrets' step\n"
