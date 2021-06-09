@@ -21,9 +21,16 @@ jobs:
             NDsdWcA5uBvKbWq4NvBC0Q password | out:OUT_PASSWORD
 #            KDjNKy8EkxYVLbnAadJvAQ file:Certificate.crt | file:~/savedfilefromkeeeper.crt
 
+      - name: Sample out vars
+        id: sample-out
+        run: |
+          echo "::set-output name=HI1::WOWOWO1\n"
+
       # Use the output from the `hello` step
       - name: Print password
         run: |
-          echo "password is [${{ steps.file_retrieve_step.outputs.OUT_PASSWORD }}]"
-          echo "who is [${{ steps.file_retrieve_step.outputs.WHO }}]"
+          echo "password is [${{ steps.file_retrieve_step.outputs.OUT_PASSWORD }}]\n"
+          echo "who is [${{ steps.file_retrieve_step.outputs.WHO }}]\n"
+          echo "${{join(steps.sample-out.outputs.*, '\n')}}
+          echo "${{join(steps.file_retrieve_step.outputs.*, '\n')}}
       - run: ls -la
