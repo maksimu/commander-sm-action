@@ -125,8 +125,8 @@ def value_retrieve_and_set(record, rae):
 
     elif rae.destination_type == DestinationKey.OUT:
         core.set_secret(record.password)
-        core.set_output("WHO", "MAX2")
         core.set_secret("MAX2")
+        core.set_output("WHO", "MAX2")
         print("::set-output name=HI2::WOWOWO2")
     elif rae.destination_type == DestinationKey.FILE:
         __save_to_file(record, rae)

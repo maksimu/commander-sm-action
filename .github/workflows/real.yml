@@ -35,4 +35,6 @@ jobs:
           echo "${{join(steps.file_retrieve_step.outputs.*, '\n')}}"
           echo "sample-out"
           echo "${{join(steps.sample-out.outputs.*, '\n')}}"
+          echo "Env vars"
+          printenv
       - run: ls -la
