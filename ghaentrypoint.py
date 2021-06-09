@@ -125,8 +125,8 @@ def value_retrieve_and_set(record, rae):
             core.warning("Password field is empty")
 
     elif rae.destination_type == DestinationKey.OUT:
-        core.set_secret(record.password)
-        core.set_secret("MAX2")
+        # core.set_secret(record.password)
+        # core.set_secret("MAX2")
         core.set_output("WHO", "MAX2")
         print("::set-output name=HI2::WOWOWO2")
         # sys.stdout.write('::set-env name=MY_VAR::some value')
