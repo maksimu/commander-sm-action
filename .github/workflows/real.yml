@@ -24,7 +24,7 @@ jobs:
       - name: Sample out vars
         id: sample-out
         run: |
-          echo "::set-output name=HI1::WOWOWO1\n"
+          echo "::set-output name=action_fruit::strawberry""
 
       # Use the output from the `hello` step
       - name: Print password
