@@ -23,5 +23,7 @@ jobs:
 
       # Use the output from the `hello` step
       - name: Print password
-        run: echo "password is ${{ steps.file_retrieve_step.outputs.OUT_PASSWORD }}"
+        run: |
+          echo "password is [${{ steps.file_retrieve_step.outputs.OUT_PASSWORD }}]"
+          echo "who is [${{ steps.file_retrieve_step.outputs.WHO }}]"
       - run: ls -la

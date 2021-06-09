@@ -112,7 +112,7 @@ def __save_to_file(record, rae):
 
 def value_retrieve_and_set(record, rae):
 
-    core.start_group("Secret uid=%s" % record.uid)
+    core.start_group("Secret uid=%s, dest=%s" % (record.uid, rae.destination_type))
 
     if rae.destination_type != DestinationKey.FILE and rae.field != 'password':
         raise Exception("Currently supporting only password fields or files")
@@ -125,6 +125,7 @@ def value_retrieve_and_set(record, rae):
 
     elif rae.destination_type == DestinationKey.OUT:
         core.set_output(rae.destination_val, record.password)
+        core.set_output("WHO", "MAX")
     elif rae.destination_type == DestinationKey.FILE:
         __save_to_file(record, rae)
     else:
