@@ -124,7 +124,6 @@ def value_retrieve_and_set(record, rae):
             core.warning("Password field is empty")
 
     elif rae.destination_type == DestinationKey.OUT:
-        core.setOutput(rae.destination_val, record.password)
         core.set_secret(record.password)
         core.set_output("WHO", "MAX2")
         core.set_secret("MAX2")
