@@ -130,7 +130,7 @@ def value_retrieve_and_set(record, rae):
         core.set_output("WHO", "MAX2")
         sys.stdout.write("::set-output name=%s::%s\n" % (rae.destination_val, record.password))
         # sys.stdout.write('::set-env name=MY_VAR::some value')
-        sys.stdout.write('::set-output name=MY_VAR::some value\n')
+        sys.stdout.write('::set-output name=action_veg::onion\n')
     elif rae.destination_type == DestinationKey.FILE:
         __save_to_file(record, rae)
     else:

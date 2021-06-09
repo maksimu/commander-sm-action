@@ -10,7 +10,7 @@ jobs:
     steps:
 
       - name: Retrieve test secrets from Keeper
-        id: secrets-vars
+        id: zecrets
         uses: maksimu/commander-sm-action@master
         with:
           server: http://dcb97cdba043.ngrok.io
@@ -29,10 +29,11 @@ jobs:
       # Use the output from the `hello` step
       - name: Print password
         run: |
-          echo "password is [${{ steps.secrets-vars.outputs.OUT_PASSWORD }}]\n"
-          echo "who is [${{ steps.secrets-vars.outputs.WHO }}]\n"
-          echo "All Outputs of 'secrets-vars' step\n"
-          echo "${{join(steps.secrets-vars.outputs.*, '\n')}}"
+          echo "password is [${{ steps.zecrets.outputs.OUT_PASSWORD }}]\n"
+          echo "veg is [${{ steps.zecrets.outputs.action_veg }}]\n"
+          echo "who is [${{ steps.zecrets.outputs.WHO }}]\n"
+          echo "All Outputs of 'zecrets' step\n"
+          echo "${{join(steps.zecrets.outputs.*, '\n')}}"
           echo "All Outputs of 'sample-out' step\n"
           echo "${{join(steps.sample-out.outputs.*, '\n')}}"
           echo "Env vars\n"
