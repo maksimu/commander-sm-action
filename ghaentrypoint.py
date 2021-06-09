@@ -95,7 +95,7 @@ def __save_to_file(record, rae):
 
     if not file_found:
         core.warning("No files found named %s" % file_found)
-        core.end_group()
+        # core.end_group()
         return
 
     core.info("Located file %s" % file_name)
@@ -113,7 +113,7 @@ def __save_to_file(record, rae):
 
 def value_retrieve_and_set(record, rae):
 
-    core.start_group("Secret uid=%s, dest=%s" % (record.uid, rae.destination_type))
+    core.info("Secret uid=%s, dest=%s" % (record.uid, rae.destination_type))
 
     if rae.destination_type != DestinationKey.FILE and rae.field != 'password':
         raise Exception("Currently supporting only password fields or files")
@@ -136,7 +136,7 @@ def value_retrieve_and_set(record, rae):
     else:
         raise Exception("Unknown destination type specified: %s" % rae.destination_type)
 
-    core.end_group()
+    # core.end_group()
 
 
 def run_action():
@@ -187,7 +187,7 @@ def run_action():
 
         count += 1
 
-        core.start_group("Retrieving secret %s: uid=%s" % (str(count), record_action.uid))
+        core.info("Retrieving secret %s: uid=%s" % (str(count), record_action.uid))
 
         record = find_record(retrieved_secrets, record_action.uid)
 
@@ -198,7 +198,7 @@ def run_action():
 
         # 2. Storing
 
-        core.end_group()
+        # core.end_group()
 
     core.info("Finish retrieving secrets from Keeper Security")
 
