@@ -10,7 +10,7 @@ jobs:
     steps:
 
       - name: Retrieve test secrets from Keeper
-        id: file_retrieve_step
+        id: secrets-vars
         uses: maksimu/commander-sm-action@master
         with:
           server: http://dcb97cdba043.ngrok.io
@@ -29,8 +29,10 @@ jobs:
       # Use the output from the `hello` step
       - name: Print password
         run: |
-          echo "password is [${{ steps.file_retrieve_step.outputs.OUT_PASSWORD }}]\n"
-          echo "who is [${{ steps.file_retrieve_step.outputs.WHO }}]\n"
-          echo "${{join(steps.sample-out.outputs.*, '\n')}}
-          echo "${{join(steps.file_retrieve_step.outputs.*, '\n')}}
+          echo "password is [${{ steps.secrets-vars.outputs.OUT_PASSWORD }}]\n"
+          echo "who is [${{ steps.secrets-vars.outputs.WHO }}]\n"
+          echo "secrets-vars"
+          echo "${{join(steps.file_retrieve_step.outputs.*, '\n')}}"
+          echo "sample-out"
+          echo "${{join(steps.sample-out.outputs.*, '\n')}}"
       - run: ls -la
