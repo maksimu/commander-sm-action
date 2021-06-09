@@ -17,8 +17,8 @@ jobs:
           keeper-secret-config: ${{ secrets.KEEPER_SECRET_KEY }}
           verify-ssl-certs: false
           secrets: |
-            NDsdWcA5uBvKbWq4NvBC0Q password | env:PASSWORD
-            NDsdWcA5uBvKbWq4NvBC0Q password | out:OUT_PASSWORD
+            NDsdWcA5uBvKbWq4NvBC0Q password | env:SECRIT
+            NDsdWcA5uBvKbWq4NvBC0Q password | out:OUT_SECRIT
 #            KDjNKy8EkxYVLbnAadJvAQ file:Certificate.crt | file:~/savedfilefromkeeeper.crt
 
       - name: Sample out vars
@@ -29,7 +29,7 @@ jobs:
       # Use the output from the `hello` step
       - name: Print password
         run: |
-          echo "password is [${{ steps.zecrets.outputs.OUT_PASSWORD }}]\n"
+          echo "password is [${{ steps.zecrets.outputs.OUT_SECRIT }}]\n"
           echo "veg is [${{ steps.zecrets.outputs.action_veg }}]\n"
           echo "who is [${{ steps.zecrets.outputs.WHO }}]\n"
           echo "All Outputs of 'zecrets' step\n"
