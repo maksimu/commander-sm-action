@@ -31,10 +31,10 @@ jobs:
         run: |
           echo "password is [${{ steps.secrets-vars.outputs.OUT_PASSWORD }}]\n"
           echo "who is [${{ steps.secrets-vars.outputs.WHO }}]\n"
-          echo "secrets-vars"
-          echo "${{join(steps.file_retrieve_step.outputs.*, '\n')}}"
-          echo "sample-out"
+          echo "All Outputs of `secrets-vars` step\n"
+          echo "${{join(steps.secrets-vars.outputs.*, '\n')}}"
+          echo "All Outputs of `sample-out` step\n"
           echo "${{join(steps.sample-out.outputs.*, '\n')}}"
-          echo "Env vars"
+          echo "Env vars\n"
           printenv
       - run: ls -la
