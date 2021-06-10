@@ -33,11 +33,16 @@ jobs:
           echo "veg is [${{ steps.zecrets.outputs.action_veg }}]\n"
           echo "who is [${{ steps.zecrets.outputs.WHO }}]\n"
           echo "out-result-map=[${{ steps.zecrets.outputs.out-result-map }}]\n"
-          echo "All Outputs of 'zecrets' step"
-          echo "${{ join(steps.zecrets.outputs.*, '\n') }}"
-          echo "${{ fromJson(steps.zecrets.outputs.out-result-map) }}"
-          echo "All Outputs of 'sample-out' step"
+
+          echo "---All Outputs of 'zecrets' step"
+          echo "ALL=${{ join(steps.zecrets.outputs.*, '\n') }}"
+          echo "fromJson(out-result-map)=${{ fromJson(steps.zecrets.outputs.out-result-map) }}"
+          echo "A1=${{ steps.zecrets.outputs.A1}}"
+
+          echo "---All Outputs of 'sample-out' step"
           echo "${{ join(steps.sample-out.outputs.*, '\n') }}"
-          echo "Env vars\n"
+
+          echo "---Env vars"
+          echo ""
           printenv
       - run: ls -la
