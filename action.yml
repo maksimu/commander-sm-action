@@ -34,6 +34,9 @@ runs:
         SECRET_CONFIG: ${{ inputs.keeper-secret-config }}
         VERIFY_SSL_CERTS: ${{ inputs.verify-ssl-certs }}
         SECRETS: ${{ inputs.secrets }}
-      run: python ${{ github.action_path }}/ghaentrypoint.py
+      run: |
+        python -V
+        python3 -V
+        python3 ${{ github.action_path }}/ghaentrypoint.py
       shell: bash
 
