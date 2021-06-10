@@ -27,10 +27,8 @@ jobs:
         run: |
           msg=$(printf '%s' ${{ steps.zecrets.outputs.out-result-map }} | jq --raw-input --slurp '.')
           echo $msg
-          echo out-result-map=${{ fromJSON(steps.zecrets.outputs.out-result-map) }}
+          echo out-result-map=${{ toJSON(steps.zecrets.outputs.out-result-map) }}
           echo OUT_SECRIT=[${{ fromJSON(steps.zecrets.outputs.out-result-map).OUT_SECRIT }}]
 
           echo "---All Outputs of 'zecrets' step"
           echo "ALL=${{ join(steps.zecrets.outputs.*, '\n') }}"
-          printenv
-      - run: ls -la
