@@ -33,9 +33,9 @@ jobs:
           echo "veg is [${{ steps.zecrets.outputs.action_veg }}]\n"
           echo "who is [${{ steps.zecrets.outputs.WHO }}]\n"
           echo "All Outputs of 'zecrets' step\n"
-          echo "${{join(steps.zecrets.outputs.*, '\n')}}"
+          echo "${{ join(steps.zecrets.outputs.*, '\n') }}"
           echo "All Outputs of 'sample-out' step\n"
-          echo "${{join(steps.sample-out.outputs.*, '\n')}}"
+          echo "${{ join(steps.sample-out.outputs.*, '\n') }}"
           echo "Env vars\n"
           printenv
       - run: ls -la

@@ -131,6 +131,7 @@ def value_retrieve_and_set(record, rae):
         sys.stdout.write("::set-output name=%s::%s\n" % (rae.destination_val, record.password))
         # sys.stdout.write('::set-env name=MY_VAR::some value')
         sys.stdout.write('::set-output name=action_veg::onion\n')
+        print('::set-output name=KeeperA::Commander')
     elif rae.destination_type == DestinationKey.FILE:
         __save_to_file(record, rae)
     else:
