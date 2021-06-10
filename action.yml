@@ -20,11 +20,17 @@ inputs:
     description: 'A list of secrets to retrieve from Keeper Vault'
     required: true
 
+outputs:
+  action-fruit: # id of the output
+    description: 'The sum of the inputs'
+    value: Applez
+
 runs:
   using: "composite"
   steps:
 
     - name: Installing dependencies
+      id: dependencies
       run: |
         python -V
         python3 -V
@@ -32,6 +38,7 @@ runs:
       shell: bash
 
     - name: Run Entry
+      id: run-entry
       env:
         KEEPER_SERVER: ${{ inputs.server }}
         SECRET_CONFIG: ${{ inputs.keeper-secret-config }}
