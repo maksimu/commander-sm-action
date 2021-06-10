@@ -29,6 +29,7 @@ jobs:
           echo $msg  > msg1.txt
           echo out-result-map=${{ fromJSON(steps.zecrets.outputs.out-result-map) }}
           echo ${{ fromJSON(steps.zecrets.outputs.out-result-map) }}  > msg2.txt
+          echo ${{ steps.zecrets.outputs.out-result-map }}  > msg3.txt
 
           echo OUT_SECRIT=[${{ fromJSON(steps.zecrets.outputs.out-result-map).OUT_SECRIT }}]
 
