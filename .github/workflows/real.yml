@@ -25,7 +25,7 @@ jobs:
       # Use the output from the `hello` step
       - name: Print password
         run: |
-          echo "OUT_SECRIT=[${{ fromJson(steps.zecrets.outputs.out-result-map).OUT_SECRIT }}]"
+          echo OUT_SECRIT=[${{ fromJson(steps.zecrets.outputs.out-result-map).OUT_SECRIT }}]
 
           echo "---All Outputs of 'zecrets' step"
           echo "ALL=${{ join(steps.zecrets.outputs.*, '\n') }}"

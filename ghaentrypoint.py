@@ -134,7 +134,7 @@ def value_retrieve_and_set(record, rae):
         raise Exception("Unknown destination type specified: %s" % rae.destination_type)
 
     if outputs_map:
-        outputs_json = json.dumps(outputs_map, indent=4)
+        outputs_json = json.dumps(outputs_map)
         core.set_output('out-result-map', outputs_json)
     # core.end_group()
 

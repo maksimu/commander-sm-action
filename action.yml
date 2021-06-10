@@ -46,7 +46,5 @@ runs:
         SECRETS: ${{ inputs.secrets }}
       run: |
         python3 ${{ github.action_path }}/ghaentrypoint.py
-        echo "::set-output name=A1::B1"
-        echo "::set-output name=A2::B2"
       shell: bash
 
