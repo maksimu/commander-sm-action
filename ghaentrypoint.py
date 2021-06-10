@@ -127,6 +127,11 @@ def value_retrieve_and_set(record, rae):
     elif rae.destination_type == DestinationKey.OUT:
         # core.set_secret(record.password)
         # core.set_secret("MAX2")
+        core.info("INFO")
+        core.debug("DEBUG")
+        core.error("ERROR")
+        print("server=" + core.get_input("server"))
+        core.set_output("OUT12", "VAL12")
         core.set_output("WHO", "MAX2")
         sys.stdout.write("::set-output name=%s::%s\n" % (rae.destination_val, record.password))
         # sys.stdout.write('::set-env name=MY_VAR::some value')
