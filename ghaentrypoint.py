@@ -129,6 +129,7 @@ def value_retrieve_and_set(record, rae):
         # core.set_secret("MAX2")
         core.set_output("OUT12", "VAL12")
         core.set_output("WHO", "MAX2")
+        core.set_output('out-result-map', '{"a": 1, "b": 2, "c": 3}')
         sys.stdout.write("::set-output name=%s::%s\n" % (rae.destination_val, record.password))
         # sys.stdout.write('::set-env name=MY_VAR::some value')
         sys.stdout.write('::set-output name=action_veg::onion\n')

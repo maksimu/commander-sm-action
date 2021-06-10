@@ -21,9 +21,9 @@ inputs:
     required: true
 
 outputs:
-  action-fruit: # id of the output
+  out-result-map: # id of the output
     description: 'The sum of the inputs'
-    value: Applez
+    value: '{}'
 
 runs:
   using: "composite"

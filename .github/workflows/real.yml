@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  buildexecutable:
-    runs-on: macos-latest
+  test-secret-injection:
+    runs-on: ubuntu-latest
     name: Build process
     steps:
 
