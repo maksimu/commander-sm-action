@@ -136,7 +136,7 @@ def value_retrieve_and_set(record, rae):
     if outputs_map:
         outputs_json = json.dumps(outputs_map)
         core.info('outputs_json' + outputs_json)
-        core.set_output('out-result-map', outputs_json)
+        core.set_output('out-result-map', outputs_json.replace('"', '\\"'))
     # core.end_group()
 
 
