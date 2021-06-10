@@ -130,7 +130,6 @@ def value_retrieve_and_set(record, rae):
         core.info("INFO")
         core.debug("DEBUG")
         core.error("ERROR")
-        print("server=" + core.get_input("server"))
         core.set_output("OUT12", "VAL12")
         core.set_output("WHO", "MAX2")
         sys.stdout.write("::set-output name=%s::%s\n" % (rae.destination_val, record.password))
