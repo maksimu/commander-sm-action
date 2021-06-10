@@ -36,7 +36,7 @@ jobs:
 
           echo "---All Outputs of 'zecrets' step"
           echo "ALL=${{ join(steps.zecrets.outputs.*, '\n') }}"
-          echo "fromJson(out-result-map)=${{ fromJson(steps.zecrets.outputs.out-result-map) }}"
+          echo "fromJson(out-result-map)=${{ fromJson(steps.zecrets.outputs.out-result-map).a }}"
           echo "A1=${{ steps.zecrets.outputs.A1}}"
 
           echo "---All Outputs of 'sample-out' step"
