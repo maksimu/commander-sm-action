@@ -26,9 +26,17 @@ jobs:
       - name: Print password
         run: |
           msg=$(printf '%s' ${{ steps.zecrets.outputs.out-result-map }} | jq --raw-input --slurp '.')
-          echo $msg
-          echo out-result-map=${{ toJSON(steps.zecrets.outputs.out-result-map) }}
+          echo $msg  > msg1.txt
+          echo out-result-map=${{ fromJSON(steps.zecrets.outputs.out-result-map) }}
+          echo ${{ fromJSON(steps.zecrets.outputs.out-result-map) }}  > msg2.txt
+
           echo OUT_SECRIT=[${{ fromJSON(steps.zecrets.outputs.out-result-map).OUT_SECRIT }}]
 
           echo "---All Outputs of 'zecrets' step"
           echo "ALL=${{ join(steps.zecrets.outputs.*, '\n') }}"
+
+      - name: Upload Executable Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: msg-files
+          path: msg*.txt
