@@ -21,28 +21,13 @@ jobs:
             NDsdWcA5uBvKbWq4NvBC0Q password | out:OUT_SECRIT
 #            KDjNKy8EkxYVLbnAadJvAQ file:Certificate.crt | file:~/savedfilefromkeeeper.crt
 
-      - name: Sample out vars
-        id: sample-out
-        run: |
-          echo "::set-output name=action_fruit::strawberry"
 
       # Use the output from the `hello` step
       - name: Print password
         run: |
-          echo "password is [${{ steps.zecrets.outputs.OUT_SECRIT }}]\n"
-          echo "veg is [${{ steps.zecrets.outputs.action_veg }}]\n"
-          echo "who is [${{ steps.zecrets.outputs.WHO }}]\n"
-          echo "out-result-map=[${{ steps.zecrets.outputs.out-result-map }}]\n"
+          echo "OUT_SECRIT=[${{ fromJson(steps.zecrets.outputs.out-result-map).OUT_SECRIT }}]"
 
           echo "---All Outputs of 'zecrets' step"
           echo "ALL=${{ join(steps.zecrets.outputs.*, '\n') }}"
-          echo "fromJson(out-result-map)=${{ fromJson(steps.zecrets.outputs.out-result-map).a }}"
-          echo "A1=${{ steps.zecrets.outputs.A1}}"
-
-          echo "---All Outputs of 'sample-out' step"
-          echo "${{ join(steps.sample-out.outputs.*, '\n') }}"
-
-          echo "---Env vars"
-          echo ""
           printenv
       - run: ls -la

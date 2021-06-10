@@ -1,3 +1,4 @@
+import json
 import os
 import sys
 from enum import Enum
@@ -115,6 +116,7 @@ def value_retrieve_and_set(record, rae):
 
     core.info("Secret uid=%s, dest=%s" % (record.uid, rae.destination_type))
 
+    outputs_map = {}
     if rae.destination_type != DestinationKey.FILE and rae.field != 'password':
         raise Exception("Currently supporting only password fields or files")
 
@@ -125,17 +127,15 @@ def value_retrieve_and_set(record, rae):
             core.warning("Password field is empty")
 
     elif rae.destination_type == DestinationKey.OUT:
-        # core.set_secret(record.password)
-        core.set_output('out-result-map', '{"a": 1, "b": 2, "c": 3}')
-        sys.stdout.write("::set-output name=%s::%s\n" % (rae.destination_val, record.password))
-        # sys.stdout.write('::set-env name=MY_VAR::some value')
-        sys.stdout.write('::set-output name=action_veg::onion\n')
-        print('::set-output name=KeeperA::Commander')
+        outputs_map[rae.destination_val] = record.password
     elif rae.destination_type == DestinationKey.FILE:
         __save_to_file(record, rae)
     else:
         raise Exception("Unknown destination type specified: %s" % rae.destination_type)
 
+    if outputs_map:
+        outputs_json = json.dumps(outputs_map, indent=4)
+        core.set_output('out-result-map', outputs_json)
     # core.end_group()
 
 
