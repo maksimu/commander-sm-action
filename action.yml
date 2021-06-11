@@ -23,7 +23,7 @@ inputs:
 outputs:
   out-result-map: # id of the output
     description: 'The sum of the inputs'
-    value: ${{ steps.print.outputs.out-result-map }}
+    value: ${{ steps.run-entry.outputs.out-result-map }}
 runs:
   using: "composite"
   steps:
