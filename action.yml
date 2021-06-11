@@ -48,3 +48,7 @@ runs:
         python3 ${{ github.action_path }}/ghaentrypoint.py
       shell: bash
 
+    - name: print
+      run: echo "::set-output name=out-result-map::{'a':'1', 'OUT_SECRIT':'991'}"
+      shell: bash
+
