@@ -45,4 +45,5 @@ runs:
         SECRETS: ${{ inputs.secrets }}
       run: |
         python3 ${{ github.action_path }}/ghaentrypoint.py
+        export XYZ="ABC"
       shell: bash
