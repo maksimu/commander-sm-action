@@ -177,7 +177,7 @@ def run_action():
                 if record.password:
                     import subprocess
                     if os.name == 'posix':  # if is in linux
-                        exp = 'export %s="%s"' % (record_action.destination_val, record.password)
+                        exp = 'echo "%s=%s" >> $GITHUB_ENV' % (record_action.destination_val, record.password)
                         core.info('Setting env var with command: %s' % exp)
                         subprocess.Popen(['/bin/bash', '-c', exp], shell=True).wait()
                     if os.name == 'nt':  # if is in windows
@@ -185,7 +185,7 @@ def run_action():
                         core.info('Setting env var with command: %s' % exp)
                         subprocess.Popen(exp, shell=True).wait()
 
-                    print("::set-env name=APP_NAME--ABC::{}".format("foo"))
+                    # print("::set-env name=APP_NAME--ABC::{}".format("foo"))
 
                 else:
                     core.warning("Password field is empty")
