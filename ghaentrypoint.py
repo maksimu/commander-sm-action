@@ -112,33 +112,6 @@ def __save_to_file(record, rae):
         core.error("Only file destination is currently supported. Ex. file:/path/to/file.json")
 
 
-def value_retrieve_and_set(record, rae):
-
-    core.info("Secret uid=%s, dest=%s" % (record.uid, rae.destination_type))
-
-    outputs_map = {}
-    if rae.destination_type != DestinationKey.FILE and rae.field != 'password':
-        raise Exception("Currently supporting only password fields or files")
-
-    if rae.destination_type == DestinationKey.ENV:
-        if record.password:
-            os.environ[rae.destination_val] = record.password
-        else:
-            core.warning("Password field is empty")
-
-    elif rae.destination_type == DestinationKey.OUT:
-        outputs_map[rae.destination_val] = record.password
-    elif rae.destination_type == DestinationKey.FILE:
-        __save_to_file(record, rae)
-    else:
-        raise Exception("Unknown destination type specified: %s" % rae.destination_type)
-
-    if outputs_map:
-        outputs_json = json.dumps(outputs_map)
-        core.debug('out-pwds = %s' % outputs_json)
-        core.set_output('out-pwds',  outputs_json)
-    # core.end_group()
-
 
 def run_action():
 
@@ -179,11 +152,11 @@ def run_action():
     core.debug("Begin retrieving secrets from Keeper...")
     core.info("Retrieved %s secrets." % len(retrieved_secrets))
 
-    # secrets_entries = secret_query.splitlines()
-
     core.debug("Secrets to retrieve: %s" % len(record_actions))
 
     count = 0
+    outputs_map = {}
+
     for record_action in record_actions:
 
         count += 1
@@ -192,14 +165,31 @@ def run_action():
 
         record = find_record(retrieved_secrets, record_action.uid)
 
-        if record:
-            value_retrieve_and_set(record, record_action)
-        else:
+        if not record:
             core.warning("Record uid=%s not found. Make sure you have this record added to the application you are using." % record_action.uid)
+        else:
+            core.info("Secret uid=%s, dest=%s" % (record.uid, record_action.destination_type))
 
-        # 2. Storing
+            if record_action.destination_type != DestinationKey.FILE and record_action.field != 'password':
+                raise Exception("Currently supporting only password fields or files")
 
-        # core.end_group()
+            if record_action.destination_type == DestinationKey.ENV:
+                if record.password:
+                    os.environ[record_action.destination_val] = record.password
+                else:
+                    core.warning("Password field is empty")
+
+            elif record_action.destination_type == DestinationKey.OUT:
+                outputs_map[record_action.destination_val] = record.password
+            elif record_action.destination_type == DestinationKey.FILE:
+                __save_to_file(record, record_action)
+            else:
+                raise Exception("Unknown destination type specified: %s" % record_action.destination_type)
+
+    if outputs_map:
+        outputs_json = json.dumps(outputs_map)
+        core.debug('out-pwds = %s' % outputs_json)
+        core.set_output('out-pwds', outputs_json)
 
     core.info("Finish retrieving secrets from Keeper Security")
 
