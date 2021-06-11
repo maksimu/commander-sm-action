@@ -191,6 +191,7 @@ def run_action():
         core.debug('out-pwds = %s' % outputs_json)
         core.set_output('out-pwds', outputs_json)
 
+    os.environ['MyTest'] = 'This Is Max'
     core.info("Finish retrieving secrets from Keeper Security")
 
 
