@@ -23,8 +23,7 @@ inputs:
 outputs:
   out-result-map: # id of the output
     description: 'The sum of the inputs'
-    value: '{}'
-
+    value: ${{ steps.print.outputs.out-result-map }}
 runs:
   using: "composite"
   steps:
@@ -49,6 +48,7 @@ runs:
       shell: bash
 
     - name: print
+      id: print
       run: echo "::set-output name=out-result-map::{'a':'1', 'OUT_SECRIT':'991'}"
       shell: bash
 
