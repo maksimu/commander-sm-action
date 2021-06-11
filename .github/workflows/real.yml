@@ -31,5 +31,4 @@ jobs:
 
       - name: Print 'env'
         run: |
-          printenv MyTest
           printenv
