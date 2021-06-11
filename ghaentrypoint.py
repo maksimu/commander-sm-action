@@ -163,7 +163,7 @@ def run_action():
 
         record = find_record(retrieved_secrets, record_action.uid)
 
-        core.set_secret(record.password)
+        # core.set_secret(record.password)
 
         if not record:
             core.warning("Record uid=%s not found. Make sure you have this record added to the application you are using." % record_action.uid)

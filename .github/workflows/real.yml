@@ -32,6 +32,6 @@ jobs:
       - name: Print 'env'
         run: |
           secz=${SECRIT}
-          echo $secz
-          echo ${MyVar}
+          echo 'secz=$secz'
+          echo 'MyVar=${MyVar}'
           printenv
