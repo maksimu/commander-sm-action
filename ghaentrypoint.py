@@ -176,6 +176,11 @@ def run_action():
             if record_action.destination_type == DestinationKey.ENV:
                 if record.password:
                     os.environ[record_action.destination_val] = record.password
+                    import subprocess
+                    subprocess.call(['setx', 'Hello', 'World!'], shell=True)
+                    proc = subprocess.Popen("ls", stdout=subprocess.PIPE, env={'MyVar': 'MyVal'})
+
+
                 else:
                     core.warning("Password field is empty")
 
