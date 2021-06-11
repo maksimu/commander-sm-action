@@ -31,7 +31,7 @@ jobs:
 
       - name: Print 'env'
         run: |
-          secz=${SECRIT:-defaultz}
+          secz=${SECRIT}
           echo $secz
           echo ${MyTest}
           printenv MyTest
