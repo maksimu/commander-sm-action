@@ -135,7 +135,8 @@ def value_retrieve_and_set(record, rae):
 
     if outputs_map:
         outputs_json = json.dumps(outputs_map)
-        core.set_output('out-pwds', outputs_json)
+        core.debug('out-pwds = %s' % outputs_json)
+        core.set_output('out-pwds',  outputs_json)
     # core.end_group()
 
 
