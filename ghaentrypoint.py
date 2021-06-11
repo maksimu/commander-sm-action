@@ -175,11 +175,14 @@ def run_action():
 
             if record_action.destination_type == DestinationKey.ENV:
                 if record.password:
-                    os.environ[record_action.destination_val] = record.password
                     import subprocess
-                    subprocess.call(['setx', 'Hello', 'World!'], shell=True)
-                    proc = subprocess.Popen("ls", stdout=subprocess.PIPE, env={'MyVar': 'MyVal'})
+                    if os.name == 'posix':  # if is in linux
+                        exp = 'export %s="%s"' % (record_action.destination_val, record.password)
+                    if os.name == 'nt':  # if is in windows
+                        exp = 'setx %s="%s"' % (record_action.destination_val, record.password)
 
+                    core.info('Setting env var with command: %s' % exp)
+                    subprocess.Popen(exp, shell=True).wait()
 
                 else:
                     core.warning("Password field is empty")
