@@ -115,8 +115,6 @@ def run_action():
 
     core.info('-= Keeper Commander GitHub Action =-')
 
-    print('\n'.join([f'{k}: {v}' for k, v in sorted(os.environ.items())]))
-
     keeper_server = environ.get('KEEPER_SERVER')
     secret_config = environ.get('SECRET_CONFIG')
     secret_query = environ.get('SECRETS')
@@ -177,17 +175,11 @@ def run_action():
 
             if record_action.destination_type == DestinationKey.ENV:
                 if record.password:
-                    import subprocess
-                    if os.name == 'posix':  # if is in linux
-                        exp = 'echo "%s=%s" >> $GITHUB_ENV' % (record_action.destination_val, record.password)
-                        core.info('Setting env var with command: %s' % exp)
-                        subprocess.Popen(['/bin/bash', '-c', exp], shell=True).wait()
-                    if os.name == 'nt':  # if is in windows
-                        exp = 'setx %s="%s"' % (record_action.destination_val, record.password)
-                        core.info('Setting env var with command: %s' % exp)
-                        subprocess.Popen(exp, shell=True).wait()
 
-                    # print("::set-env name=APP_NAME--ABC::{}".format("foo"))
+                    github_env = os.environ.get('GITHUB_ENV')
+
+                    with open(github_env, 'a') as github_env_file:
+                        github_env_file.write("%s=%s" % (record_action.destination_val, record.password))
 
                 else:
                     core.warning("Password field is empty")
