@@ -1,6 +1,5 @@
 import json
 import os
-import sys
 from enum import Enum
 from os import environ
 from actions_toolkit import core
@@ -112,7 +111,6 @@ def __save_to_file(record, rae):
         core.error("Only file destination is currently supported. Ex. file:/path/to/file.json")
 
 
-
 def run_action():
 
     core.info('-= Keeper Commander GitHub Action =-')
@@ -164,6 +162,8 @@ def run_action():
         core.info("Retrieving secret %s: uid=%s" % (str(count), record_action.uid))
 
         record = find_record(retrieved_secrets, record_action.uid)
+
+        core.set_secret(record.password)
 
         if not record:
             core.warning("Record uid=%s not found. Make sure you have this record added to the application you are using." % record_action.uid)
