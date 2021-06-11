@@ -185,6 +185,8 @@ def run_action():
                         core.info('Setting env var with command: %s' % exp)
                         subprocess.Popen(exp, shell=True).wait()
 
+                    print("::set-env name=APP_NAME--ABC::{}".format("foo"))
+
                 else:
                     core.warning("Password field is empty")
 
