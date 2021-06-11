@@ -115,6 +115,8 @@ def run_action():
 
     core.info('-= Keeper Commander GitHub Action =-')
 
+    print('\n'.join([f'{k}: {v}' for k, v in sorted(os.environ.items())]))
+
     keeper_server = environ.get('KEEPER_SERVER')
     secret_config = environ.get('SECRET_CONFIG')
     secret_query = environ.get('SECRETS')
