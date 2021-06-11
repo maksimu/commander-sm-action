@@ -21,9 +21,9 @@ inputs:
     required: true
 
 outputs:
-  out-result-map: # id of the output
+  out-pwds: # id of the output
     description: 'The sum of the inputs'
-    value: ${{ steps.run-entry.outputs.out-result-map }}
+    value: ${{ steps.run-entry.outputs.out-pwds }}
 runs:
   using: "composite"
   steps:
@@ -46,9 +46,3 @@ runs:
       run: |
         python3 ${{ github.action_path }}/ghaentrypoint.py
       shell: bash
-
-    - name: print
-      id: print
-      run: echo "::set-output name=out-result-map::{'a':'1', 'OUT_SECRIT':'991'}"
-      shell: bash
-

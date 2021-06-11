@@ -18,20 +18,15 @@ jobs:
           verify-ssl-certs: false
           secrets: |
             NDsdWcA5uBvKbWq4NvBC0Q password | env:SECRIT
-            NDsdWcA5uBvKbWq4NvBC0Q password | out:OUT_SECRIT
+            NDsdWcA5uBvKbWq4NvBC0Q password | out:OUT_SECRIT1
+            NDsdWcA5uBvKbWq4NvBC0Q password | out:OUT_SECRIT2
 #            KDjNKy8EkxYVLbnAadJvAQ file:Certificate.crt | file:~/savedfilefromkeeeper.crt
 
 
       # Use the output from the `hello` step
       - name: Print password
         run: |
-          msg=$(printf '%s' ${{ steps.zecrets.outputs.out-result-map }} | jq --raw-input --slurp '.')
-          echo $msg  > msg1.txt
-          echo out-result-map=${{ fromJSON(steps.zecrets.outputs.out-result-map) }}
-          echo ${{ fromJSON(steps.zecrets.outputs.out-result-map) }}  > msg2.txt
-          echo ${{ steps.zecrets.outputs.out-result-map }}  > msg3.txt
-
-          echo OUT_SECRIT=[${{ fromJSON(steps.zecrets.outputs.out-result-map).OUT_SECRIT }}]
+          echo OUT_SECRIT=[${{ fromJSON(steps.zecrets.outputs.out-pwds).OUT_SECRIT1 }}]
 
           echo "---All Outputs of 'zecrets' step"
           echo "ALL=${{ join(steps.zecrets.outputs.*, '\n') }}"
