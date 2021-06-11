@@ -35,3 +35,4 @@ jobs:
           echo 'secz=$secz'
           echo 'MyVar=${MyVar}'
           printenv
+        shell: bash
