@@ -82,7 +82,7 @@ def __save_to_file(record, rae):
     core.debug("Number of files in secret: %s" % len(record.files))
     file_found = None
     for f in record.files:
-
+        core.debug("Checking file name: \"%s\", file title: \"%s\"" % (f.name, f.title))
         if f.name == file_name or f.title == file_name:
             core.info("Found file '%s'" % file_name)
             if file_found:
@@ -94,7 +94,7 @@ def __save_to_file(record, rae):
             file_found = f
 
     if not file_found:
-        core.warning("No files found named %s" % file_found)
+        core.warning("No files found named \"%s\"" % file_name)
         # core.end_group()
         return
 
