@@ -21,8 +21,8 @@ inputs:
     required: true
 
 outputs:
-  out-secrets:
-    description: 'JSON of secrets'
+  out-pwds: # id of the output
+    description: 'The sum of the inputs'
     value: ${{ steps.run-entry.outputs.out-pwds }}
 runs:
   using: "composite"
@@ -43,5 +43,6 @@ runs:
         SECRET_CONFIG: ${{ inputs.keeper-secret-config }}
         VERIFY_SSL_CERTS: ${{ inputs.verify-ssl-certs }}
         SECRETS: ${{ inputs.secrets }}
-      run: python3 ${{ github.action_path }}/ghaentrypoint.py
+      run: |
+        python3 ${{ github.action_path }}/ghaentrypoint.py
       shell: bash
