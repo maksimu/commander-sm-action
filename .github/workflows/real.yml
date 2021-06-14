@@ -20,7 +20,7 @@ jobs:
             NDsdWcA5uBvKbWq4NvBC0Q password | env:SECRIT
             NDsdWcA5uBvKbWq4NvBC0Q password | out:OUT_SECRIT1
             NDsdWcA5uBvKbWq4NvBC0Q password | out:OUT_SECRIT2
-#            KDjNKy8EkxYVLbnAadJvAQ file:Certificate.crt | file:~/savedfilefromkeeeper.crt
+            NDsdWcA5uBvKbWq4NvBC0Q file:mymodule.py | file:~/myflie-mymodule.py
 
 
       # Use the output from the `hello` step
@@ -34,3 +34,7 @@ jobs:
         run: |
           echo "SECRIT=${{ env.SECRIT }}"
         shell: bash
+
+      - name: Print 'files'
+        run: |
+          ls -la ~
