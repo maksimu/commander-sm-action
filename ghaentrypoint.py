@@ -178,7 +178,6 @@ def run_action():
 
                     github_env = os.environ.get('GITHUB_ENV')
 
-
                     with open(github_env, 'a') as github_env_file:
                         github_env_file.write("%s=%s" % (record_action.destination_val, record.password))
 
