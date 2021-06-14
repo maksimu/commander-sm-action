@@ -193,8 +193,8 @@ def run_action():
 
     if outputs_map:
         outputs_json = json.dumps(outputs_map)
-        core.debug('out-secrets = %s' % outputs_json)
-        core.set_output('out-secrets', outputs_json)
+        core.debug('out-pwds = %s' % outputs_json)
+        core.set_output('out-pwds', outputs_json)
 
     os.environ['MyTest'] = 'This Is Max'
     core.info("Finish retrieving secrets from Keeper Security")
