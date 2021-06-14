@@ -31,5 +31,5 @@ jobs:
 
       - name: Print 'env'
         run: |
-          echo "SECRIT=[${{ env.SECRET }}]"
+          echo "SECRET=[${{ env.SECRET }}]"
         shell: bash
