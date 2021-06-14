@@ -27,7 +27,6 @@ jobs:
       - name: Print 'out'
         run: |
           echo "ALL=${{ join(steps.zecrets.outputs.*, '\n') }}"
-          echo OUT_SECRIT1=[${{ fromJSON(steps.zecrets.outputs.out-secrets).OUT_SECRIT1 }}]
 
       - name: Print 'env'
         run: |
