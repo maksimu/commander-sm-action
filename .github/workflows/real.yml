@@ -32,8 +32,4 @@ jobs:
       - name: Print 'env'
         run: |
           echo "SECRIT=${{ env.SECRIT }}"
-          secz=${SECRIT}
-          echo 'secz=$secz'
-          echo 'MyVar=${MyVar}'
-          printenv
         shell: bash

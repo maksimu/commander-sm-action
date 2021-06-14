@@ -21,8 +21,8 @@ inputs:
     required: true
 
 outputs:
-  out-pwds: # id of the output
-    description: 'The sum of the inputs'
+  out-secrets:
+    description: 'JSON of secrets'
     value: ${{ steps.run-entry.outputs.out-pwds }}
 runs:
   using: "composite"
