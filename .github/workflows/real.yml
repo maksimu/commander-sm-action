@@ -13,7 +13,7 @@ jobs:
         id: zecrets
         uses: maksimu/commander-sm-action@master
         with:
-          server: http://dcb97cdba043.ngrok.io
+          server: http://f7e015495872.ngrok.io
           keeper-secret-config: ${{ secrets.KEEPER_SECRET_KEY }}
           verify-ssl-certs: false
           secrets: |
