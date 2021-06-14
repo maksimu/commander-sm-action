@@ -23,7 +23,7 @@ inputs:
 outputs:
   out-secrets:
     description: 'JSON of secrets'
-    value: ${{ steps.run-entry.outputs.out-pwds }}
+    value: ${{ steps.run-entry.outputs.out-secrets }}
 runs:
   using: "composite"
   steps:
