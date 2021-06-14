@@ -76,7 +76,7 @@ def find_record(secrets, search_term):
 
 
 def __save_to_file(record, rae):
-    file_name = rae.destination_val
+    file_name = rae.field
 
     core.info("Processing file %s" % file_name)
     core.debug("Number of files in secret: %s" % len(record.files))
