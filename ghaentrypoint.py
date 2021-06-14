@@ -163,10 +163,11 @@ def run_action():
 
         record = find_record(retrieved_secrets, record_action.uid)
 
-        # core.set_secret(record.password)
+        core.set_secret(record.password)
 
         if not record:
-            core.warning("Record uid=%s not found. Make sure you have this record added to the application you are using." % record_action.uid)
+            core.warning("Record uid=%s not found. Make sure you have this record added to the application you are "
+                         "using." % record_action.uid)
         else:
             core.info("Secret uid=%s, dest=%s" % (record.uid, record_action.destination_type))
 
@@ -177,6 +178,8 @@ def run_action():
                 if record.password:
 
                     github_env = os.environ.get('GITHUB_ENV')
+
+                    core.debug("Adding secret to GITHUB_ENV file (%s)" % github_env )
 
                     with open(github_env, 'a') as github_env_file:
                         github_env_file.write("%s=%s" % (record_action.destination_val, record.password))
@@ -193,10 +196,9 @@ def run_action():
 
     if outputs_map:
         outputs_json = json.dumps(outputs_map)
-        core.debug('out-pwds = %s' % outputs_json)
-        core.set_output('out-pwds', outputs_json)
+        core.debug('out-secrets = %s' % outputs_json)
+        core.set_output('out-secrets', outputs_json)
 
-    os.environ['MyTest'] = 'This Is Max'
     core.info("Finish retrieving secrets from Keeper Security")
 
 

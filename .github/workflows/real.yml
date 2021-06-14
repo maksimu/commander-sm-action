@@ -17,7 +17,7 @@ jobs:
           keeper-secret-config: ${{ secrets.KEEPER_SECRET_KEY }}
           verify-ssl-certs: false
           secrets: |
-            NDsdWcA5uBvKbWq4NvBC0Q password | env:SECRIT
+            NDsdWcA5uBvKbWq4NvBC0Q password | env:SECRET
             NDsdWcA5uBvKbWq4NvBC0Q password | out:OUT_SECRIT1
             NDsdWcA5uBvKbWq4NvBC0Q password | out:OUT_SECRIT2
 #            KDjNKy8EkxYVLbnAadJvAQ file:Certificate.crt | file:~/savedfilefromkeeeper.crt
@@ -31,9 +31,5 @@ jobs:
 
       - name: Print 'env'
         run: |
-          echo "${{ env.SECRIT }}"
-          secz=${SECRIT}
-          echo 'secz=$secz'
-          echo 'MyVar=${MyVar}'
-          printenv
+          echo "SECRIT=[${{ env.SECRET }}]"
         shell: bash
