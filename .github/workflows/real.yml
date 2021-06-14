@@ -26,7 +26,7 @@ jobs:
       # Use the output from the `hello` step
       - name: Print 'out'
         run: |
-          echo OUT_SECRIT1=[${{ fromJSON(steps.zecrets.outputs).OUT_SECRIT1 }}]
+          echo OUT_SECRIT1=[${{ fromJSON(steps.zecrets.outputs.out-secrets).OUT_SECRIT1 }}]
           echo "ALL=${{ join(steps.zecrets.outputs.*, '\n') }}"
           echo "ALL=${{ join(steps.zecrets.outputs.*, '\n') }}"
 
