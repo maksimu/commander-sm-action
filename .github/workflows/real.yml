@@ -20,14 +20,13 @@ jobs:
             NDsdWcA5uBvKbWq4NvBC0Q password | env:SECRIT
             NDsdWcA5uBvKbWq4NvBC0Q password | out:OUT_SECRIT1
             NDsdWcA5uBvKbWq4NvBC0Q password | out:OUT_SECRIT2
-
 #            KDjNKy8EkxYVLbnAadJvAQ file:Certificate.crt | file:~/savedfilefromkeeeper.crt
 
 
       # Use the output from the `hello` step
       - name: Print 'out'
         run: |
-          echo OUT_SECRIT1=[${{ fromJSON(steps.zecrets.outputs.out-pwds).OUT_SECRIT1 }}]
+          echo OUT_SECRIT1=[${{ fromJSON(steps.zecrets.outputs.out-secrets).OUT_SECRIT1 }}]
           echo "ALL=${{ join(steps.zecrets.outputs.*, '\n') }}"
           echo "ALL=${{ join(steps.zecrets.outputs.*, '\n') }}"
 
