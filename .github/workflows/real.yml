@@ -40,6 +40,3 @@ jobs:
           ls -la ~
           echo "----------------- WORK ----------------"
           ls -la ~/work
-          echo "---------------- RUNNER ----------------"
-          ls -la ~/runner
-
