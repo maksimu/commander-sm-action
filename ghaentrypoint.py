@@ -36,12 +36,12 @@ class RecordActionEntry:
     @staticmethod
     def from_entry(record_action_entry_str):
 
-        se_parts = record_action_entry_str.split('|') # [uid123 password], [PASSWORD]
+        se_parts = record_action_entry_str.split('|')       # [uid123 password], [PASSWORD]
 
         record_details_str = se_parts[0].strip()            # uid123 password
         record_details_arr = record_details_str.split()     # ['uid123', 'password'] OR ['uid321', 'file:config.json']
-        record_uid = record_details_arr[0]          # 'uid123'
-        secret_value_location = record_details_arr[1]          # Field to retrieve. ex. 'password'
+        record_uid = record_details_arr[0]                  # 'uid123'
+        secret_value_location = record_details_arr[1]       # Field to retrieve. ex. 'password' OR 'file:config.json'
 
         destination_str = se_parts[1].strip()
 
@@ -76,7 +76,8 @@ def find_record(secrets, search_term):
 
 
 def __save_to_file(record, rae):
-    file_name = rae.field
+    file_name = rae.field                   # ex. 'file:config.json'
+    file_name = file_name.split(':')[1]     # ex. 'config.json'
 
     core.info("Processing file %s" % file_name)
     core.debug("Number of files in secret: %s" % len(record.files))
