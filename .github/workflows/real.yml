@@ -20,7 +20,7 @@ jobs:
             NDsdWcA5uBvKbWq4NvBC0Q password | env:SECRIT
             NDsdWcA5uBvKbWq4NvBC0Q password | out:OUT_SECRIT1
             NDsdWcA5uBvKbWq4NvBC0Q password | out:OUT_SECRIT2
-            NDsdWcA5uBvKbWq4NvBC0Q file:mymodule.py | file:myflie-mymodule.py
+            NDsdWcA5uBvKbWq4NvBC0Q file:mymodule.py | file:/tmp/myflie-mymodule.py
 
 
       # Use the output from the `hello` step
