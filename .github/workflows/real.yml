@@ -40,4 +40,4 @@ jobs:
           pwd
           cd ~
           ls -la ~
-          ls /tmp/runner/work/commander-sm-action/commander-sm-action/
+          ls -la /tmp
