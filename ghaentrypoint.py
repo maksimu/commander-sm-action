@@ -132,15 +132,13 @@ def run_action():
     core.debug('Secret query:%s' % secret_query)
 
     # 1. Authenticate Commander
-    c = Commander()
+    c = Commander(config=InMemoryKeyValueStorage(secret_config))
 
     if keeper_server:
         core.info('Keeper server: %s' % keeper_server)
         c.server = keeper_server
 
     c.verify_ssl_certs = verify_ssl_certs
-
-    c.config = InMemoryKeyValueStorage(secret_config)
 
     record_actions = RecordActionEntry.from_query_entries(secret_query)
 
