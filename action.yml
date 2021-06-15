@@ -31,7 +31,7 @@ runs:
     - name: Installing dependencies
       id: dependencies
       run: |
-        python -V
+#        python -V
         python3 -V
         python3 -m pip install -r ${{ github.action_path }}/requirements.txt  #
       shell: bash
