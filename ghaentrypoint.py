@@ -132,13 +132,15 @@ def run_action():
     core.debug('Secret query:%s' % secret_query)
 
     # 1. Authenticate Commander
+    c = Commander()
+
     if keeper_server:
         core.info('Keeper server: %s' % keeper_server)
-        Commander.server = keeper_server
+        c.server = keeper_server
 
-    Commander.verify_ssl_certs = verify_ssl_certs
+    c.verify_ssl_certs = verify_ssl_certs
 
-    Commander.config = InMemoryKeyValueStorage(secret_config)
+    c.config = InMemoryKeyValueStorage(secret_config)
 
     record_actions = RecordActionEntry.from_query_entries(secret_query)
 
@@ -146,7 +148,7 @@ def run_action():
     uids = [r.uid for r in record_actions]
 
     # Retrieving only secrets that were asked in the action
-    retrieved_secrets = Commander.get_secrets(uids)
+    retrieved_secrets = c.get_secrets(uids)
 
     core.debug("Begin retrieving secrets from Keeper...")
     core.info("Retrieved %s secrets." % len(retrieved_secrets))
@@ -164,7 +166,7 @@ def run_action():
 
         record = find_record(retrieved_secrets, record_action.uid)
 
-        # core.set_secret(record.password)
+        core.set_secret(record.password)
 
         if not record:
             core.warning("Record uid=%s not found. Make sure you have this record added to the application you are using." % record_action.uid)

@@ -10,7 +10,7 @@ jobs:
     steps:
 
       - name: Retrieve test secrets from Keeper
-        id: zecrets
+        id: keepersecrets
         uses: maksimu/commander-sm-action@master
         with:
           server: https://dev.keepersecurity.com
@@ -21,14 +21,15 @@ jobs:
             NDsdWcA5uBvKbWq4NvBC0Q password | out:OUT_SECRIT1
             NDsdWcA5uBvKbWq4NvBC0Q password | out:OUT_SECRIT2
             NDsdWcA5uBvKbWq4NvBC0Q file:mymodule.py | file:/tmp/myflie-mymodule.py
+            NDsdWcA5uBvKbWq4NvBC0Q custom:passcode | env:mypasscode
 
 
       # Use the output from the `hello` step
       - name: Print 'out'
         run: |
-          echo OUT_SECRIT1=[${{ fromJSON(steps.zecrets.outputs.out-secrets).OUT_SECRIT1 }}]
-          echo "ALL=${{ join(steps.zecrets.outputs.*, '\n') }}"
-          echo "ALL=${{ join(steps.zecrets.outputs.*, '\n') }}"
+          echo OUT_SECRIT1=[${{ fromJSON(steps.keepersecrets.outputs.out-secrets).OUT_SECRIT1 }}]
+          echo "ALL=${{ join(steps.keepersecrets.outputs.*, '\n') }}"
+          echo "ALL=${{ join(steps.keepersecrets.outputs.*, '\n') }}"
 
       - name: Print 'env'
         run: |
