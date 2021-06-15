@@ -38,5 +38,3 @@ jobs:
       - name: Print 'files'
         run: |
           ls -la ~
-          echo "----------------- WORK ----------------"
-          ls -la ~/work
