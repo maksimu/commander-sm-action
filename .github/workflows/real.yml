@@ -18,7 +18,7 @@ jobs:
           verify-ssl-certs: false
           secrets: |
             NDsdWcA5uBvKbWq4NvBC0Q password | env:SECRIT
-            NDsdWcA5uBvKbWq4NvBC0Q field:login | out:Login
+            NDsdWcA5uBvKbWq4NvBC0Q field:login | out:login
             NDsdWcA5uBvKbWq4NvBC0Q password | out:OUT_SECRIT2
             NDsdWcA5uBvKbWq4NvBC0Q file:mymodule.py | file:/tmp/myflie-mymodule.py
             NDsdWcA5uBvKbWq4NvBC0Q custom:passcode | env:mypasscode
@@ -27,13 +27,13 @@ jobs:
       # Use the output from the `hello` step
       - name: Print 'out'
         run: |
-          echo OUT_SECRIT1=[${{ fromJSON(steps.keepersecrets.outputs.out-secrets).OUT_SECRIT1 }}]
+          echo login=[${{ fromJSON(steps.keepersecrets.outputs.out-secrets).login }}]
           echo "ALL=${{ join(steps.keepersecrets.outputs.*, '\n') }}"
           echo "ALL=${{ join(steps.keepersecrets.outputs.*, '\n') }}"
 
       - name: Print 'env'
         run: |
-          echo "SECRIT=${{ env.SECRIT }}"
+          echo "mypasscode=${{ env.mypasscode }}"
         shell: bash
 
       - name: Print 'files'
