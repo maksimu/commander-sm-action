@@ -1,4 +1,4 @@
 actions-toolkit
 cryptography>=3.4.6
-keepercommandersm==0.0.22a
+keepercommandersm==0.0.23a
 python-dotenv
