@@ -20,6 +20,11 @@ inputs:
     description: 'A list of secrets to retrieve from Keeper Vault'
     required: true
 
+  unmask-secrets:
+    description: 'Unmask secrets in the logs. Default: false'
+    required: false
+    default: 'false'
+
 outputs:
   out-secrets:
     description: 'JSON of secrets'
@@ -42,6 +47,7 @@ runs:
         SECRET_CONFIG: ${{ inputs.keeper-secret-config }}
         VERIFY_SSL_CERTS: ${{ inputs.verify-ssl-certs }}
         SECRETS: ${{ inputs.secrets }}
+        UNMASK: ${{ inpust.unmask-secrets }}
       run: |
         python3 ${{ github.action_path }}/ghaentrypoint.py
       shell: bash

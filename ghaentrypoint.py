@@ -37,12 +37,12 @@ class RecordActionEntry:
     @staticmethod
     def from_entry(record_action_entry_str):
 
-        se_parts = record_action_entry_str.split('|')       # [uid123 field:password], [PASSWORD]
+        se_parts = record_action_entry_str.split('|')           # [uid123 field:password], [PASSWORD]
 
-        record_details_str = se_parts[0].strip()            # uid123 password
-        record_details_arr = record_details_str.split()     # ['uid123', 'field:password'] OR ['uid321', 'file:config.json']
-        record_uid = record_details_arr[0]                  # 'uid123'
-        secret_value_location = record_details_arr[1]       # Field to retrieve. ex.
+        record_details_str = se_parts[0].strip()                # uid123 password
+        record_details_arr = record_details_str.split(" ", 1)   # ['uid123', 'field:password'] OR ['uid321', 'file:config.json']
+        record_uid = record_details_arr[0]                      # 'uid123'
+        secret_value_location = record_details_arr[1]           # Field to retrieve. ex.
                                                                                 # 'password' OR
                                                                                 # 'field:login' OR
                                                                                 # 'custom:MyField' OR
@@ -132,6 +132,7 @@ def run_action():
     secret_config = environ.get('SECRET_CONFIG')
     secret_query = environ.get('SECRETS')
     verify_ssl_certs = environ.get('VERIFY_SSL_CERTS')
+    unmask_secret = environ.get('UNMASK')
 
     if verify_ssl_certs:
         verify_ssl_certs = verify_ssl_certs.lower() in ['true', '1', 't', 'y', 'yes']
@@ -176,7 +177,8 @@ def run_action():
         record = find_record(retrieved_secrets, record_action.uid)
 
         if not record:
-            core.warning("Record uid=%s not found. Make sure you have this record added to the application you are using." % record_action.uid)
+            core.warning("Record uid=%s not found. Make sure you have this record added to the application you are "
+                         "using." % record_action.uid)
         else:
             core.info("Secret uid=%s, source field type=[%s], source field value=[%s], dest=%s" % (
                 record.uid,
@@ -196,7 +198,11 @@ def run_action():
                     raise Exception("Currently supporting only fields and custom fields in the record")
 
                 env_map[record_action.destination_val] = secret_value
-                core.set_secret(secret_value)   # hiding any values, even title
+
+                if unmask_secret == 'true':
+                    core.warning("Secret with destination '%s' will be unmasked" % record_action.destination_val)
+                else:
+                    core.set_secret(secret_value)   # hiding any values, even title
 
             elif record_action.destination_type == DestinationKey.OUT:
                 outputs_map[record_action.destination_val] = record.password
