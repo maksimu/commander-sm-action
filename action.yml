@@ -11,14 +11,14 @@ inputs:
     required: false
     default: 'keepersecurity.com'
 
+  secrets:
+    description: 'A list of secrets to retrieve from Keeper Vault'
+    required: true
+
   verify-ssl-certs:
     description: 'Verify SSL certificate. Default: true'
     required: false
     default: 'true'
-
-  secrets:
-    description: 'A list of secrets to retrieve from Keeper Vault'
-    required: true
 
   unmask-secrets:
     description: 'Unmask secrets in the logs. Default: false'
